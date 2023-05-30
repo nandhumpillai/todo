@@ -18,8 +18,18 @@ function MainPage() {
 
       {/*........... input box to add the todos................................. */}
       <div className="input">
-        <input value={toDo} onChange={(e) => setTodo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
-        <i onClick={() => setTodos([...toDos, { text: toDo, status: false, key: Date.now(), active:true }])} className="fas fa-plus"></i>
+        <input value={toDo} onChange={(e) => {
+            setTodo(e.target.value)
+          }
+        } type="text" placeholder="🖊️ Add item..." />
+        <i onClick={() => {
+          if (toDo!=='') {
+            setTodos([...toDos, { text: toDo, status: false, key: Date.now(), active:true }])
+            setTodo('')
+          }else{
+            alert("please enter some tasks")
+          }
+        }} className="fas fa-plus"></i>
       </div>
       <div className="todos">
         {
@@ -41,17 +51,29 @@ function MainPage() {
                 }}/>
                 {todoValue.status?<p className='linethrough'>{todoValue.text}</p>:<p>{todoValue.text}</p>}
               </div>
+    {/* .......................delete button.................................... */}
               <div className="right">
-                <i onClick={()=>{
-                  toDos.filter((e)=>{
-                    if(e.key===todoValue.key){
-                      e.active=false
-                    }
-                    setTodos([...toDos])
-                    return e
-                  })
-                }} className="fa fa-trash" aria-hidden="true"></i>
+                <i 
+        // element deletion using filer method        
+                // onClick={()=>{
+                //   toDos.filter((e)=>{
+                //     if(e.key===todoValue.key){
+                //       e.active=false
+                //     }
+                //     setTodos([...toDos])
+                //     return e
+                //   })
+                // }} 
+
+      //  delete using array splice         
+                onClick={()=>{
+                  const index = toDos.indexOf(todoValue)
+                  toDos.splice(index, 1) 
+                  setTodos([...toDos])
+                }}
+                className="fa fa-trash" aria-hidden="true"></i>
               </div>
+  {/* '''/.''''''''''''''''''''''''''''''''''''''''''' */}
             </div>)
           })
         }
