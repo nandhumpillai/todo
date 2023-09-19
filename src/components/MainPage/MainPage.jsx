@@ -18,10 +18,18 @@ function MainPage() {
 
       {/*........... input box to add the todos................................. */}
       <div className="input">
-        <input value={toDo} onChange={(e) => {
-            setTodo(e.target.value)
+        <input value={toDo} onChange={(e) => setTodo(e.target.value)}
+        onKeyUp={(e)=>{
+          if(e.key==="Enter"){
+            if (toDo!=='') {
+              setTodos([...toDos, { text: toDo, status: false, key: Date.now(), active:true }])
+              setTodo('')
+            }else{
+              alert("please enter some tasks")
+            }
           }
-        } type="text" placeholder="🖊️ Add item..." />
+        }}
+        type="text" placeholder="🖊️ Add item..." />
         <i onClick={() => {
           if (toDo!=='') {
             setTodos([...toDos, { text: toDo, status: false, key: Date.now(), active:true }])
@@ -35,6 +43,7 @@ function MainPage() {
         {
           toDos.map((todoValue) => {
             return (
+  // checking whether the task is active, below we used this "active" variable to remove the task from list       
             todoValue.active && <div className="todo" key={todoValue.key}>
               <div className="left">
                 <input type="checkbox" value={todoValue.status} onChange={(e)=>{
@@ -48,7 +57,7 @@ function MainPage() {
                     
                   })
                   setTodos([...toDos])
-                }}/>
+                } }/>
                 {todoValue.status?<p className='linethrough'>{todoValue.text}</p>:<p>{todoValue.text}</p>}
               </div>
     {/* .......................delete button.................................... */}

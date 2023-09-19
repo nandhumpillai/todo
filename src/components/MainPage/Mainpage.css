@@ -52,7 +52,7 @@
     cursor: pointer;
     font-size: larger;
     font-weight: 900;
-    color: grey;
+    color: rgb(202, 22, 22);
     margin-right: 5px;
   }
   .app .todos {
@@ -83,12 +83,13 @@
     font-size: medium;
     font-weight: 700;
     font-style: normal;
-    color: grey;
+    color: rgb(187, 42, 42);
   }
   
 
   .linethrough{
     text-decoration: line-through;
     font-style: italic;
+    color: blue;
   }
   
